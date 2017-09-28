@@ -1,0 +1,49 @@
+<table class="table">
+  <thead>
+    <tr>
+      <td colspan="4">
+        <%= form_tag users_path, :theme => 'twitter-bootstrap-3', method: :get, id: 'limit_form' do %>
+          <%= page_entries_info @users, :entry_name => 'user' %>
+          <%= select_tag :limit, options_for_select([5, 10, 15, 20], selected: params[:limit] || 5)%>
+          <% if @current_user.has_role? :admin %>
+            <%= select_tag :show_all_users, options_for_select({active: '',all: 1}, selected: params[:show_all_users] || '')%>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Registered date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.email, users_show_path(user)%></td>
+        <td><%= user.role_names %></td>
+        <td><%= user.created_at %></td>
+        <td>
+          <% if @current_user.has_role? :admin or
+            (@current_user.has_role? :moderator and not user.has_role? :admin and not user.has_role? :moderator) or
+            @current_user.id == user.id %>
+
+            <%= link_to t("button.table_edit_action"), users_edit_path(user) %>
+            <% if @current_user.id != user.id %> |
+              <% unless user.deleted? %>
+                <%= link_to t("button.table_destroy_action"), users_destroy_path(user), method: :delete, data: { confirm: t("message.delete_confirm") } %>
+              <% else %>
+                <%= t("caption.deleted") %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+	</tbody>
+</table>
+<div class="text-center">
+	<%= paginate @users, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm"%>
+</div>
+</script>

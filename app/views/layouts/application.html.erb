@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rails4Boilerplate</title>
+  <meta charset="UTF-8">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= yield :stylesheet %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+  <%= render 'layouts/header' %>
+
+  <% if controller_name == "sessions"%>
+    <%= render 'layouts/header' %>
+  <% else %>
+    <%= render partial: "layouts/alert_box", :locals => {flash: flash} %>
+  <% end %>
+  <%= yield %>
+  </div>
+<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag "rails.validations", "rails.validations.custom" %>
+<% script_file = "#{Rails.root}/app/assets/javascripts/#{params[:controller]}/#{params[:action]}"%>
+<% if File.exists?(script_file + ".js") || File.exists?(script_file + ".js.erb")%>
+  <%= javascript_include_tag "#{params[:controller]}/#{params[:action]}" %>
+<% end %>
+<%= yield :javascript %>
+</body>
+</html>

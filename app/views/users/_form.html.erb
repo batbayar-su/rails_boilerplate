@@ -1,0 +1,39 @@
+<%= form_for @user, url: users_update_path(@user), validate: true, :html => {:autocomplete => "off"} do |f| %>
+  <div class="field">
+    <%= f.label :roles, :class => "col-md-2" %>
+    <%= f.select :roles, options_from_collection_for_select(@roles, "id", "name", @user.roles.ids), {}, { multiple: true, class: "selectpicker", disabled: (!@current_user.has_any_role? :admin, :moderator) }%>
+  </div>
+  <div class="field">
+    <%= f.label :first_name, :class => "col-md-2" %>
+    <%= f.text_field :first_name, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name, :class => "col-md-2" %>
+    <%= f.text_field :last_name, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :display_name, :class => "col-md-2" %>
+    <%= f.text_field :display_name, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number, :class => "col-md-2" %>
+    <%= f.text_field :phone_number, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_date, :class => "col-md-2" %>
+    <%= f.date_field :birth_date, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :post_code, :class => "col-md-2" %>
+    <%= f.text_field :post_code, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :address, :class => "col-md-2" %>
+    <%= f.text_field :address, :class => "form-control" %>
+  </div>
+  <div class="actions ">
+    <%= link_to t("button.back"), users_path, :class => "col-md-2" %>
+    <%= f.submit :class => "btn btn-primary update", :value => t("button.update") %>
+  </div>
+<% end %>
+

@@ -1,0 +1,20 @@
+# Ignore bundler config.
+/.bundle
+/vendor/bundle
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/log/*
+/tmp
+# Gemfile.lock
+doc/
+*.swp
+*.swo
+*~
+.rspec
+.project
+.DS_Store
+.idea
+.secret
+/spec/tmp
+/spec/scenario/screenshot
+/spec/scenario/screenshot/*

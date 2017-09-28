@@ -1,0 +1,10 @@
+<%= form_tag(maintenance_post_path, method: "post") do %>
+  <%if @maintenance then %>
+    <%= hidden_field_tag 'switch', 'OFF' %>
+  <%else%>
+    <%= hidden_field_tag 'switch', 'ON' %>
+  <%end%>
+  <% if current_user.has_role? :admin %>
+    <%= submit_tag(value = @maintenance ? "set to OFF" : "set to ON", class: "btn btn-default") %>
+  <%end%>
+<% end %>

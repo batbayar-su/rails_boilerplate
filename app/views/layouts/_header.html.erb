@@ -1,0 +1,23 @@
+<div class="row clearfix">
+  <% if user_signed_in?  %>
+    <div class="col-md-6">
+      <%= link_to_unless_current "Users", users_path%>
+      <% if current_user.has_role? :admin %>
+        | <%= link_to_unless_current "Roles", roles_path%>
+        | <%= link_to_unless_current "Maintenance", maintenance_path%>
+      <% end %>
+    </div>
+    <div class="col-md-6 text-right">
+      <%= link_to "EN", locale: "en" %> |
+      <%= link_to "JA", locale: "ja" %> |
+      <%= link_to "MN", locale: "mn" %>
+
+      <% if current_user.has_role? :admin %>
+        <%=t("caption.welcome_admin")%>
+      <% else %>
+        <%=t("caption.welcome_message")%>
+      <% end %>
+      <%= current_user.email %>! <%= link_to(t("button.logout"), destroy_user_session_path) %>
+    </div>
+  <% end %>
+</div>

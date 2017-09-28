@@ -1,0 +1,14 @@
+Metrics/LineLength:
+  Enabled: False
+Metrics/BlockLength:
+  Enabled: False
+Metrics/MethodLength:
+  Enabled: False
+Metrics/AbcSize:
+  Enabled: False
+Style/AsciiComments:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Max: 10
+Metrics/CyclomaticComplexity:
+  Max: 10

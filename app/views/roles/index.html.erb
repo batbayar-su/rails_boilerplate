@@ -1,0 +1,37 @@
+<%= link_to 'New Role', roles_new_path %>
+<table class="table">
+  <thead>
+    <tr>
+      <td>
+        <%= form_tag roles_path, :theme => 'twitter-bootstrap-3', method: :get, id: 'limit_form' do %>
+          <%= page_entries_info @roles, :entry_name => 'role' %>
+          <%= select_tag :limit, options_for_select([5, 10, 15, 20], selected: params[:limit] || 5)%>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>Registered date</th>
+      <% if current_user.has_role? :admin %>
+        <th>Actions</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @roles.each do |role| %>
+      <tr>
+        <td><%= link_to role.name, roles_show_path(role) %></td>
+        <td><%= role.created_at %></td>
+        <td>
+          <% if @current_user.has_role? :admin and !Rails.configuration.x.immune_roles.include?(role.name)%>
+            <%= link_to 'edit', roles_edit_path(role) %> |
+            <%= link_to 'delete', roles_destroy_path(role), method: :delete, data: { confirm: t("message.delete_confirm") } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+	</tbody>
+</table>
+<div class="text-center">
+	<%= paginate @roles, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm"%>
+</div>

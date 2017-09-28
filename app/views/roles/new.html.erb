@@ -1,0 +1,11 @@
+<h3><%= t('caption.role_new_page_title')%></h3>
+<%= form_for @role, validate: true do |f| %>
+  <div class="field">
+    <%= f.label :name, :class => "col-md-2" %>
+    <%= f.text_field :name, autofocus: true, :class => "form-control" %>
+  </div>
+  <div class="actions" >
+    <%= link_to 'Back', roles_path, :class => "col-md-2"  %>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<%end%>

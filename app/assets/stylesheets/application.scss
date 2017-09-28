@@ -1,0 +1,15 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-select";
+
+.field_with_errors .message {
+  color: #FF9494;
+  padding-left: 10px;
+  font-weight: normal;
+  display: inline-block;
+}
+
+.form-control {
+  width: 15%;
+  margin: 5px; 
+}

@@ -1,0 +1,55 @@
+<% if @user.first_name.blank? %>
+  <h3><%= t('caption.user_show_page_title')%></h3>
+<% else %>
+  <h3><%= @user.first_name%></h3>
+<% end %>
+<p>
+  <strong><%= t2("user.role_names") %></strong>
+  <%= get_role_name_list(@roles) %>
+</p>
+<p>
+  <strong><%= t2("user.first_name") %></strong>
+  <%= @user.first_name %>
+</p>
+<p>
+  <strong><%= t2("user.last_name") %></strong>
+  <%= @user.last_name %>
+</p>
+<p>
+  <strong><%= t2("user.display_name") %></strong>
+  <%= @user.display_name %>
+</p>
+<p>
+  <strong><%= t2("user.phone_number") %></strong>
+  <%= @user.phone_number %>
+</p>
+<p>
+  <strong><%= t2("user.birth_date") %></strong>
+  <%= @user.birth_date %>
+</p>
+<p>
+  <strong><%= t2("user.address") %></strong>
+  <%= @user.address %>
+</p>
+<p>
+  <strong><%= t2("user.post_code") %></strong>
+  <%= @user.post_code %>
+</p>
+<p>
+  <strong><%=t("caption.user_signed_date")%></strong>
+  <%= @user.current_sign_in_at %> => <%= @user.last_sign_in_at %>
+</p>
+<p>
+  <strong><%=t("caption.user_current_ip")%></strong>
+  <%= @user.current_sign_in_ip %> => <%= @user.last_sign_in_ip %>
+</p>
+<p>
+  <strong><%=t("caption.user_created_date")%></strong>
+  <%= @user.created_at %> => <%= @user.updated_at %>
+</p>
+<%= link_to t("button.back"), users_path %>
+<% if @current_user.has_role? :admin or
+            (@current_user.has_role? :moderator and not @user.has_role? :admin) or
+            @current_user.id == @user.id %> |
+  <%= link_to t("button.table_edit_action"), users_edit_path(@user) %>
+<% end %>

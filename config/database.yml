@@ -1,0 +1,37 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+  reconnect: true
+
+development:
+  <<: *default
+  database: r4bp_dev
+  host: 192.168.100.217
+  username: unimedia
+  password: unimedia
+
+production:
+  <<: *default
+  database: r4bp_prod
+  host: 192.168.100.217
+  username: unimedia
+  password: unimedia
+  pool: 10
+
+staging:
+  <<: *default
+  database: r4bp_prod
+  host: 192.168.100.217
+  username: unimedia
+  password: unimedia
+  pool: 10  
+
+test:
+  <<: *default
+  database: r4bp_test
+  host: 192.168.100.217
+  username: unimedia
+  password: unimedia
+  pool: 10
